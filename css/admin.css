@@ -1,0 +1,11 @@
+h2{
+
+    /* Fazer a palavra ficar no meio da tela */
+      display: flex;
+      justify-content: center; /* centraliza horizontal */
+      align-items: flex-start; /* posiciona no topo */
+      height: 100vh;
+      margin: 0;
+      padding-top: 50px; /* distância do topo */
+      font-size: 24px;
+}

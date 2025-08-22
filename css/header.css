@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: gray;
+  padding: 15px 20px;
+  display: flex;
+  gap: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px 12px;
+  transition: background 0.3s;
+}
+
+header a:hover {
+  background-color: #333;
+  border-radius: 5px;
+}
+
+.page-content {
+  margin-top: 70px;
+}

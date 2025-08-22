@@ -1,0 +1,11 @@
+a {
+      display: inline-block;     /* faz virar "caixinha" */
+      padding: 10px 20px;        /* espaço interno */
+      color: white;              /* cor do texto */
+      background-color: #ff4d4d;     /* cor de fundo */
+      border: 2px solid #ff4d4d;     /* borda vermelha */
+      border-radius: 6px;        /* cantos arredondados (opcional) */
+      font-family: Arial, sans-serif;
+      text-decoration: none;     /* remove sublinhado se for <a> */
+      cursor: pointer;           /* cursor de mãozinha */
+    }

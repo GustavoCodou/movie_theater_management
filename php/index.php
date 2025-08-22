@@ -1,5 +1,5 @@
 <?php
-include "partials/header.php"
+include "../partials/header.php"
 ?>
 
 
@@ -8,7 +8,7 @@ include "partials/header.php"
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="css/index.css"> <!-- aqui conecta o CSS -->
+  <link rel="stylesheet" href="../css/index.css"> <!-- aqui conecta o CSS -->
 </head>
 <body>
 
@@ -16,11 +16,11 @@ include "partials/header.php"
   <div class="conteudo">
     <h2 id="titulo-principal" >Welcome to our PHP App</h2>
     <h2 id="titulo-secundario" >Securely login and manage your account with us</h2>
-    <?php include "partials/navigation.php";?>
+    <?php include "../partials/navigation.php";?>
   </div>
 
 </body>
 </html>
 
 
-<?php include "partials/footer.php";?>
+<?php include "../partials/footer.php";?>
