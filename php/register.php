@@ -1,70 +1,64 @@
 <?php
-
 //Aqui conectamos o banco
 include 'db.php';
 session_start();
 
 $error= "";
 
-/* 🔹 O que é $_SERVER
+/* 🔹 session_start()
+O PHP tem um recurso chamado sessão, que serve para armazenar informações
+enquanto o usuário navega entre páginas.
+Depois que a sessão está ativa, você pode salvar dados nela usando $_SESSION:
+$_SESSION['username'] = "Kaiba"; 
+$_SESSION['tipo'] = "admin";
+*/
 
-Em PHP, $_SERVER é uma superglobal.
-Superglobals são arrays especiais criados automaticamente pelo PHP, disponíveis em qualquer lugar do código (sem precisar declarar antes).
-O $_SERVER guarda informações sobre o servidor e sobre a requisição HTTP que está acontecendo.
+// O POST faz uma requisição vinda do formulário
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["username"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $confirm_password = $_POST["confirm_password"];
 
-📌 Exemplos do que você encontra nele:
-
-$_SERVER["REQUEST_METHOD"] → método usado (GET, POST, PUT, DELETE...).
-$_SERVER["HTTP_USER_AGENT"] → navegador do usuário (ex: Chrome, Firefox).
-$_SERVER["REMOTE_ADDR"] → IP de quem fez a requisição.
-$_SERVER["SCRIPT_NAME"] → nome do arquivo PHP que está rodando.*/
-
-// O post faz uma requisição do formulario
-
-if($_SERVER["REQUEST_METHOD"]== "POST"){
-
-    // Ele vai armazenar na variavel oq ele pegar do formulario
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-    $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
-
-    if($password !== $confirm_password){
-        $error = "Password do not mactch";
+    // 1. Verifica se as senhas são iguais
+    if ($password !== $confirm_password) {
+        $error = "As senhas não coincidem!";
     } else {
+        // 2. Criptografa a senha antes de salvar
+        $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "SELECT * FROM usuarios WHERE username='$username' LIMIT 1";
-        $result = mysqli_query($conn, $sql);
-
-        if(mysqli_num_rows($result) ===1){
-            $error = "Username already exists, Please choose another";
-        }else{
-
-            // Ele vai armazenar na variavel oq ele pegar do formulario
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-            
-            $sql = "Insert INTO users (username, password, email) VALUES ('$username', '$passwordHash', '$email' )";
-
-            if(mysqli_query($conn, $sql)){
-                    echo "DATA INSERTED";
-            }else{
-                    $error = "SOMETHING HAPPENED not data inserted, error:" . mysqli_error($conn);
-            };
-       
+        // 3. Verifica se já existem usuários cadastrados
+        $check = $conn->query("SELECT * FROM usuarios");
+        if ($check->num_rows === 0) {
+            // Se não existe ninguém → primeiro usuário é admin
+            $tipo = "admin";
+        } else {
+            $tipo = "usuario";
         }
 
+        // 4. Salva no banco
+        $sql = "INSERT INTO usuarios (username, email, password, tipo) 
+                VALUES ('$username', '$email', '$hash', '$tipo')";
+        if ($conn->query($sql) === TRUE) {
+            
+            // 5. Cria sessão do usuário registrado
+            $_SESSION["username"] = $username;
+            $_SESSION["tipo"] = $tipo;
 
-        
+            // 6. Redireciona para admin ou usuário
+            if ($tipo == "admin") {
+                header("Location: admin.php");
+                exit;
+            } else {
+                header("Location: usuario.php");
+                exit;
+            }
 
-      
-
-        
-       exit;
-
+        } else {
+            $error = "Erro no cadastro: " . $conn->error;
+        }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -72,48 +66,38 @@ if($_SERVER["REQUEST_METHOD"]== "POST"){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/register.css"> <!-- aqui conecta o CSS -->
     <title>Document</title>
 </head>
 <body>
 
-<h2>Register</h2>
+<?php include "../partials/header.php" ?>
 
 <?php if($error): ?>
-
-<p style="color:red">
-    <?php echo $error; ?>
-
-</p>
-
+    <p style="color:red">
+        <?php echo $error; ?>
+    </p>
 <?php endif; ?>
 
-
 <form method="POST" action="">
-            <h2>Create your Account</h2>
+    <h2>Create your Account</h2>
 
-            <p style="color:red">
+    <label for="username">Username:</label>
+    <input placeholder="Enter your username" type="text" name="username" required>
 
-            </p>
+    <label for="email">Email:</label>
+    <input placeholder="Enter your email" type="email" name="email" required>
 
-            <label for="username">Username:</label>
-             <!-- O nome da variavel para usar no php é o name -->
-            <input placeholder="Enter your username" type="text" name="username" required>
+    <label for="password">Password:</label>
+    <input placeholder="Enter your password" type="password" name="password" required>
 
-            <label for="email">Email:</label>
-            <input placeholder="Enter your email" type="email" name="email" required>
+    <label for="confirm_password">Confirm Password:</label>
+    <input placeholder="Confirm your password" type="password" name="confirm_password" required>
 
-            <label for="password">Password:</label>
-            <input placeholder="Enter your password" type="password" name="password" required>
-
-            <label for="confirm_password">Confirm Password:</label>
-            <input placeholder="Confirm your password" type="password" name="confirm_password" required>
-
-            <input type="submit" value="Register">
-        </form>
+    <input type="submit" value="Register">
+</form>
     
 </body>
 </html>
 
-<?php
-mysqli_close($conn);
-?>
+<?php mysqli_close($conn); ?>

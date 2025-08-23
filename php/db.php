@@ -1,11 +1,8 @@
-<php
+<?php
+$conn = mysqli_connect("localhost", "root", "", "cinema", 3308);
 
-$conn =mysqli_connect("localhost","root","","cinema");
-
-if($conn){
-    echo "Connected";
-} else{
-    echo "Not connected" . mysqli_error($conn);
+// Checa a conexão
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
-
 ?>

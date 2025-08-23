@@ -1,11 +1,126 @@
-h2{
+/* ====== RESET BÁSICO ====== */
+* {
+    margin: 0; /* remove margens padrão */
+    padding: 0; /* remove espaçamentos padrão */
+    box-sizing: border-box; /* faz com que padding e border não aumentem o tamanho do elemento */
+    font-family: Arial, sans-serif; /* fonte padrão da página */
+}
 
-    /* Fazer a palavra ficar no meio da tela */
-      display: flex;
-      justify-content: center; /* centraliza horizontal */
-      align-items: flex-start; /* posiciona no topo */
-      height: 100vh;
-      margin: 0;
-      padding-top: 50px; /* distância do topo */
-      font-size: 24px;
+/* ====== ESTILO GERAL ====== */
+body {
+    background-color: #f4f6f9; /* cor de fundo suave */
+    color: #333; /* cor do texto */
+    padding: 20px; /* espaçamento interno */
+}
+
+/* ====== TÍTULO ====== */
+h1 {
+    text-align: center; /* centraliza o título */
+    margin-bottom: 20px; /* espaço abaixo */
+    color: #2c3e50; /* azul escuro */
+}
+
+/* ====== CONTAINER PRINCIPAL ====== */
+.container {
+    display: grid; /* usa grid layout */
+    grid-template-columns: 2fr 1fr; /* duas colunas: lista maior e formulário menor */
+    gap: 20px; /* espaço entre as colunas */
+}
+
+/* ====== LISTA DE FILMES ====== */
+.movie-list {
+    background: #fff; /* fundo branco */
+    padding: 20px; /* espaçamento interno */
+    border-radius: 10px; /* cantos arredondados */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* leve sombra */
+}
+
+.movie-list h2 {
+    margin-bottom: 15px;
+    color: #34495e;
+}
+
+/* Estilo para cada item de filme */
+.movie-item {
+    display: flex; /* coloca conteúdo lado a lado */
+    justify-content: space-between; /* espaço entre nome e botões */
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd; /* linha separadora */
+}
+
+/* Botões de ação (editar e remover) */
+.movie-item button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+/* Botão de editar */
+.btn-edit {
+    background-color: #3498db; 
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #2980b9;
+}
+
+/* Botão de remover */
+.btn-delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;
+}
+
+/* ====== FORMULÁRIO DE ADICIONAR FILME ====== */
+.add-movie {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.add-movie h2 {
+    margin-bottom: 15px;
+    color: #16a085;
+}
+
+/* Inputs do formulário */
+.add-movie input, 
+.add-movie textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+.add-movie input:focus,
+.add-movie textarea:focus {
+    border-color: #16a085; /* destaque no foco */
+}
+
+/* Botão de adicionar */
+.add-movie button {
+    width: 100%;
+    padding: 10px;
+    background-color: #27ae60;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-movie button:hover {
+    background-color: #219150;
 }

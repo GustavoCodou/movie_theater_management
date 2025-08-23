@@ -1,0 +1,118 @@
+/* ====== ESTILOS GERAIS ====== */
+body {
+    /* Define a fonte padrão da página */
+    font-family: Arial, sans-serif;
+
+    /* Coloca um fundo cinza claro para dar contraste */
+    background-color: #f4f4f9;
+
+    /* Remove margens e preenchimentos padrões do navegador */
+    margin: 0;
+    padding: 0;
+
+    /* Centraliza o conteúdo vertical e horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Faz com que a altura ocupe toda a tela */
+    height: 100vh;
+}
+
+/* ====== CONTAINER DO FORMULÁRIO ====== */
+form {
+    /* Fundo branco para destacar o formulário */
+    background-color: #ffffff;
+
+    /* Espaçamento interno para afastar o conteúdo das bordas */
+    padding: 30px;
+
+    /* Bordas levemente arredondadas */
+    border-radius: 10px;
+
+    /* Sombra para dar efeito de destaque (elevação) */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    /* Largura fixa para o formulário */
+    width: 300px;
+}
+
+/* ====== TÍTULO DO FORMULÁRIO ====== */
+form h2 {
+    /* Centraliza o texto */
+    text-align: center;
+
+    /* Cor do título */
+    color: #333;
+
+    /* Espaço abaixo do título */
+    margin-bottom: 20px;
+}
+
+/* ====== ESTILO DOS CAMPOS DE ENTRADA ====== */
+form input {
+    /* Largura total (ocupa todo o espaço disponível) */
+    width: 100%;
+
+    /* Espaçamento interno */
+    padding: 10px;
+
+    /* Margem inferior para separar os campos */
+    margin: 10px 0;
+
+    /* Bordas arredondadas */
+    border-radius: 5px;
+
+    /* Borda cinza clara */
+    border: 1px solid #ccc;
+
+    /* Tamanho da fonte */
+    font-size: 14px;
+
+    /* Transição suave quando a borda mudar */
+    transition: border-color 0.3s;
+}
+
+/* Quando o usuário clica dentro do input */
+form input:focus {
+    /* Borda azul para destacar o campo selecionado */
+    border-color: #007bff;
+
+    /* Remove o contorno padrão feio do navegador */
+    outline: none;
+}
+
+/* ====== BOTÃO DO FORMULÁRIO ====== */
+form button {
+    /* Largura total */
+    width: 100%;
+
+    /* Cor de fundo azul */
+    background-color: #007bff;
+
+    /* Texto branco */
+    color: white;
+
+    /* Espaçamento interno */
+    padding: 10px;
+
+    /* Bordas arredondadas */
+    border-radius: 5px;
+
+    /* Remove a borda padrão */
+    border: none;
+
+    /* Cursor de mãozinha ao passar por cima */
+    cursor: pointer;
+
+    /* Tamanho da fonte */
+    font-size: 16px;
+
+    /* Transição suave para efeitos */
+    transition: background-color 0.3s;
+}
+
+/* Efeito ao passar o mouse no botão */
+form button:hover {
+    background-color: #0056b3; /* Azul mais escuro */
+}
